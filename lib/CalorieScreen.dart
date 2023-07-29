@@ -7,6 +7,9 @@ import 'package:kitchen_counter/api/food_api.dart';
 
 class CalorieScreen extends StatelessWidget {
   final _controller1 = TextEditingController();
+  final Function(Food)? onFoodItemSelected;
+
+  CalorieScreen({this.onFoodItemSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -86,20 +89,17 @@ class CalorieScreen extends StatelessWidget {
 
   void foodListbox(BuildContext context, List<Food> food) {
     showDialog(
-      context: context,
-      builder: (context) {
-        return DialogBox2(
-          controller: _controller1,
-          list: food,
-
-          // onCancel: () {},
-          // onSave: (p0) {},
-
-          // Close the dialog box
-
-          // onCancel: () => Navigator.of(context).pop(), // Close the dialog box
-        );
-      },
-    );
+        context: context,
+        builder: (context) {
+          return DialogBox2(
+            controller: _controller1,
+            list: food,
+            onItemSelected: (Food selectedFood) {
+              Navigator.of(context).pop(); // Close the dialog box
+              onFoodItemSelected
+                  ?.call(selectedFood); // Call the callback function
+            },
+          );
+        });
   }
 }

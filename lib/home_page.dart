@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kitchen_counter/Utility/NavigationDrawer.dart';
 import 'package:kitchen_counter/Utility/pie_chart.dart';
+import 'package:kitchen_counter/data/food_data.dart';
 
-class MyHomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Food? selectedFood;
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -30,7 +38,7 @@ class MyHomePage extends StatelessWidget {
             child: Center(
               child: Transform.scale(
                 scale: 2.0,
-                child: PieChartWidget(),
+                child: PieChartWidget(food: selectedFood),
               ),
             ),
           ),

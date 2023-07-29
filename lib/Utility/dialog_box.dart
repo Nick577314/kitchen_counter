@@ -57,12 +57,13 @@ class DialogBox extends StatelessWidget {
 class DialogBox2 extends StatefulWidget {
   final TextEditingController controller;
   final List<Food> list;
+  final Function(Food) onItemSelected;
 
-  DialogBox2({
-    super.key,
-    required this.list,
-    required this.controller,
-  });
+  DialogBox2(
+      {super.key,
+      required this.list,
+      required this.controller,
+      required this.onItemSelected});
 
   @override
   _DialogBox2State createState() => _DialogBox2State();
@@ -70,11 +71,6 @@ class DialogBox2 extends StatefulWidget {
 
 class _DialogBox2State extends State<DialogBox2> {
   Food? selectedFood;
-
-  // void _onFoodSelected(Food? selectedFood) {
-  //   // Call the callback function to send selectedFood back to the homepage
-  //   widget.onFoodSelected(selectedFood);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +99,10 @@ class _DialogBox2State extends State<DialogBox2> {
                     color: isSelected ? Colors.tealAccent[100] : Colors.white,
                     elevation: 4,
                     child: ListTile(
-                      title: Text(food.foodname),
+                      title: Text(widget.list[index].foodname),
                       textColor: Colors.black,
                       onTap: () {
-                        setState(() {
-                          selectedFood = isSelected ? null : food;
-                        });
+                        widget.onItemSelected(widget.list[index]);
                       },
                     ),
                   );

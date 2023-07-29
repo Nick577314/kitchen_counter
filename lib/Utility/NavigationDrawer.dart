@@ -42,7 +42,7 @@ Widget buildMenuItems(BuildContext context) {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MyHomePage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
           );
         },
       ),

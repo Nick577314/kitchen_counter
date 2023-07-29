@@ -4,7 +4,9 @@ import 'package:kitchen_counter/data/food_data.dart';
 import 'package:kitchen_counter/Utility/app_colors.dart';
 
 class PieChartWidget extends StatefulWidget {
-  PieChartWidget({Key? key}) : super(key: key);
+  final Food? food; // Add this line to accept the selected food
+
+  PieChartWidget({required this.food, Key? key}) : super(key: key);
 
   @override
   _PieChartState createState() => _PieChartState();
