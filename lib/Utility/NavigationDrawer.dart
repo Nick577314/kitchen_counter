@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_counter/CalorieScreen.dart';
 import 'package:kitchen_counter/ProfilePage/profileScreen.dart';
-import 'package:kitchen_counter/main.dart';
+
+import 'package:kitchen_counter/home_page.dart';
 
 class Navigation extends StatelessWidget {
   const Navigation({Key? key}) : super(key: key);

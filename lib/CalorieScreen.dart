@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_counter/Utility/Widget/NavigationDrawer.dart';
-import 'package:kitchen_counter/Utility/Widget/pie_chart.dart';
+import 'package:kitchen_counter/Utility/NavigationDrawer.dart';
+import 'package:kitchen_counter/Utility/pie_chart.dart';
 import 'package:kitchen_counter/Utility/dialog_box.dart';
 import 'package:kitchen_counter/data/food_data.dart';
 import 'package:kitchen_counter/api/food_api.dart';
@@ -20,12 +20,6 @@ class CalorieScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            alignment: Alignment.topCenter,
-            width: 300,
-            height: 300,
-            child: Transform.scale(scale: 1.0, child: PieChartWidget()),
-          ),
           Container(
             padding: const EdgeInsets.all(8.0),
             child: Card(

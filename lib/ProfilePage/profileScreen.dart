@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_counter/ProfilePage/widgets/profile_menu.dart';
+import 'package:kitchen_counter/ProfilePage/profile_menu.dart';
 import 'package:kitchen_counter/ProfilePage/updateprofile.dart';
 import 'package:get/get.dart';
-import 'package:kitchen_counter/Utility/Widget/NavigationDrawer.dart';
+import 'package:kitchen_counter/Utility/NavigationDrawer.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-
-import 'package:kitchen_counter/Utility/Widget/app_colors.dart';
+import 'package:kitchen_counter/data/food_data.dart';
+import 'package:kitchen_counter/Utility/app_colors.dart';
 
 class PieChartWidget extends StatefulWidget {
   PieChartWidget({Key? key}) : super(key: key);
@@ -18,9 +18,9 @@ class _PieChartState extends State<PieChartWidget> {
     // TODO: not sure what is the point of appBarHeight variable
     final double appBarHeight = MediaQuery.of(context).padding.top;
     return Card(
-      color: Colors.teal[600],
+      color: Colors.teal[400],
       elevation: 20.0,
-      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 200),
+      margin: EdgeInsets.symmetric(vertical: 50, horizontal: 150),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

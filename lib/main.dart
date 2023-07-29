@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kitchen_counter/Utility/Widget/NavigationDrawer.dart';
+import 'package:kitchen_counter/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,22 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'My App',
       home: MyHomePage(),
     );
   }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text("HomePage"),
-          backgroundColor: Colors.teal[600],
-        ),
-        backgroundColor: Colors.teal[300],
-        drawer: const Navigation(),
-      );
 }
