@@ -4,6 +4,7 @@ import 'package:kitchen_counter/Utility/pie_chart.dart';
 import 'package:kitchen_counter/Utility/dialog_box.dart';
 import 'package:kitchen_counter/data/food_data.dart';
 import 'package:kitchen_counter/api/food_api.dart';
+import 'package:kitchen_counter/home_page.dart';
 
 class CalorieScreen extends StatelessWidget {
   final _controller1 = TextEditingController();
@@ -89,17 +90,23 @@ class CalorieScreen extends StatelessWidget {
 
   void foodListbox(BuildContext context, List<Food> food) {
     showDialog(
-        context: context,
-        builder: (context) {
-          return DialogBox2(
-            controller: _controller1,
-            list: food,
-            onItemSelected: (Food selectedFood) {
-              Navigator.of(context).pop(); // Close the dialog box
-              onFoodItemSelected
-                  ?.call(selectedFood); // Call the callback function
-            },
-          );
-        });
+      context: context,
+      builder: (context) {
+        return DialogBox2(
+          controller: _controller1,
+          list: food,
+          onItemSelected: (Food? selectedFood) {
+            if (selectedFood != null) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(
+                            selectedFood: selectedFood,
+                          )));
+            }
+          },
+        );
+      },
+    );
   }
 }

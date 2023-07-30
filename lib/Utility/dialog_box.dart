@@ -57,13 +57,14 @@ class DialogBox extends StatelessWidget {
 class DialogBox2 extends StatefulWidget {
   final TextEditingController controller;
   final List<Food> list;
-  final Function(Food) onItemSelected;
+  final Function(Food?) onItemSelected;
 
-  DialogBox2(
-      {super.key,
-      required this.list,
-      required this.controller,
-      required this.onItemSelected});
+  DialogBox2({
+    Key? key,
+    required this.list,
+    required this.controller,
+    required this.onItemSelected,
+  }) : super(key: key);
 
   @override
   _DialogBox2State createState() => _DialogBox2State();
@@ -102,7 +103,9 @@ class _DialogBox2State extends State<DialogBox2> {
                       title: Text(widget.list[index].foodname),
                       textColor: Colors.black,
                       onTap: () {
-                        widget.onItemSelected(widget.list[index]);
+                        setState(() {
+                          selectedFood = widget.list[index];
+                        });
                       },
                     ),
                   );
@@ -113,7 +116,7 @@ class _DialogBox2State extends State<DialogBox2> {
               padding: const EdgeInsets.only(top: 12.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pop(selectedFood);
+                  widget.onItemSelected(selectedFood);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.teal[400],
@@ -126,8 +129,4 @@ class _DialogBox2State extends State<DialogBox2> {
       ),
     );
   }
-}
-
-List<Food> sendData(List<Food> foodlist) {
-  return foodlist;
 }

@@ -1,24 +1,28 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:kitchen_counter/data/food_data.dart';
-import 'package:kitchen_counter/Utility/app_colors.dart';
+import 'package:pie_chart/pie_chart.dart';
+import 'package:kitchen_counter/data/food_data.dart'; // Import your food data model here
 
-class PieChartWidget extends StatefulWidget {
+class PieChartWidget extends StatelessWidget {
   final Food? food; // Add this line to accept the selected food
 
   PieChartWidget({required this.food, Key? key}) : super(key: key);
 
   @override
-  _PieChartState createState() => _PieChartState();
-}
-
-class _PieChartState extends State<PieChartWidget> {
-  int touchedIndex = -1;
-  //Food food;
-  @override
   Widget build(BuildContext context) {
-    // TODO: not sure what is the point of appBarHeight variable
-    final double appBarHeight = MediaQuery.of(context).padding.top;
+    final Map<String, double> dataMap = {
+      'Calories': food?.calories ?? 0,
+      'Fat': food?.fat ?? 0,
+      'Protein': food?.protein ?? 0,
+      'Carbohydrates': food?.carbohydrates ?? 0,
+    };
+
+    final List<Color> colorList = [
+      Color.fromARGB(255, 129, 0, 47),
+      Colors.yellow,
+      Colors.purple,
+      Colors.green,
+    ];
+
     return Card(
       color: Colors.teal[400],
       elevation: 20.0,
@@ -30,27 +34,29 @@ class _PieChartState extends State<PieChartWidget> {
           const SizedBox(height: 30),
           Expanded(
             child: PieChart(
-              PieChartData(
-                pieTouchData: PieTouchData(
-                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                    setState(() {
-                      if (!event.isInterestedForInteractions ||
-                          pieTouchResponse == null ||
-                          pieTouchResponse.touchedSection == null) {
-                        touchedIndex = -1;
-                        return;
-                      }
-                      touchedIndex =
-                          pieTouchResponse.touchedSection!.touchedSectionIndex;
-                    });
-                  },
+              dataMap: dataMap,
+              animationDuration: Duration(milliseconds: 800),
+              chartLegendSpacing: 32,
+              chartRadius: MediaQuery.of(context).size.width / 5.2,
+              colorList: colorList,
+              initialAngleInDegree: 0,
+              chartType: ChartType.disc,
+              ringStrokeWidth: 32,
+              legendOptions: LegendOptions(
+                showLegendsInRow: false,
+                legendPosition: LegendPosition.right,
+                showLegends: true,
+                legendShape: BoxShape.circle,
+                legendTextStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
-                borderData: FlBorderData(
-                  show: false,
-                ),
-                sectionsSpace: 0,
-                centerSpaceRadius: 30,
-                sections: getSections(),
+              ),
+              chartValuesOptions: ChartValuesOptions(
+                showChartValueBackground: true,
+                showChartValues: true,
+                showChartValuesInPercentage: true,
+                showChartValuesOutside: false,
+                decimalPlaces: 2,
               ),
             ),
           ),
@@ -66,76 +72,5 @@ class _PieChartState extends State<PieChartWidget> {
         ],
       ),
     );
-  }
-
-  List<PieChartSectionData> getSections() {
-    // final double calories = widget.food.calories;
-    // final double fat = widget.food.fat;
-    // final double carbohydrates = widget.food.carbohydrates;
-    // final double protein = widget.food.protein;
-
-    return List.generate(4, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 20.0 : 13.0;
-      final radius = isTouched ? 50.0 : 40.0;
-      const shadows = [Shadow(color: Colors.black, blurRadius: 2)];
-
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: const Color.fromARGB(255, 129, 0, 47),
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: AppColors.contentColorYellow,
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        case 2:
-          return PieChartSectionData(
-            color: AppColors.contentColorPurple,
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        case 3:
-          return PieChartSectionData(
-            color: AppColors.contentColorGreen,
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.mainTextColor1,
-              shadows: shadows,
-            ),
-          );
-        default:
-          throw Error();
-      }
-    });
   }
 }
