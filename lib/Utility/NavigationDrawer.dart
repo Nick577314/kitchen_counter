@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_counter/CalorieScreen.dart';
-import 'package:kitchen_counter/ProfilePage/profileScreen.dart';
+import 'package:kitchen_counter/Screens/CalorieScreen.dart';
+import 'package:kitchen_counter/Screens/ProfilePage/ProfileScreen.dart';
 
-import 'package:kitchen_counter/home_page.dart';
+import 'package:kitchen_counter/Screens/HomeScreen.dart';
 
 class Navigation extends StatelessWidget {
   const Navigation({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ Widget buildMenuItems(BuildContext context) {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => HomeScreen()),
           );
         },
       ),

@@ -31,17 +31,19 @@ class PieChartWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 30),
+          const SizedBox(
+            height: 30,
+          ),
           Expanded(
             child: PieChart(
               dataMap: dataMap,
               animationDuration: Duration(milliseconds: 800),
-              chartLegendSpacing: 32,
-              chartRadius: MediaQuery.of(context).size.width / 5.2,
+              chartLegendSpacing: 50,
+              chartRadius: MediaQuery.of(context).size.width / 5.0,
               colorList: colorList,
               initialAngleInDegree: 0,
               chartType: ChartType.disc,
-              ringStrokeWidth: 32,
+              ringStrokeWidth: 30,
               legendOptions: LegendOptions(
                 showLegendsInRow: false,
                 legendPosition: LegendPosition.right,
@@ -55,8 +57,8 @@ class PieChartWidget extends StatelessWidget {
                 showChartValueBackground: true,
                 showChartValues: true,
                 showChartValuesInPercentage: true,
-                showChartValuesOutside: false,
-                decimalPlaces: 2,
+                showChartValuesOutside: true,
+                decimalPlaces: 1,
               ),
             ),
           ),
@@ -64,7 +66,7 @@ class PieChartWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(8.0),
                 //IndicatorsWidget()
               ),
             ],

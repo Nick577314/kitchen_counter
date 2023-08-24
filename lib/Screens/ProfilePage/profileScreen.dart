@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_counter/ProfilePage/profile_menu.dart';
-import 'package:kitchen_counter/ProfilePage/updateprofile.dart';
+import 'package:kitchen_counter/Screens/ProfilePage/profile_menu.dart';
+import 'package:kitchen_counter/Screens/ProfilePage/updateprofile.dart';
 import 'package:get/get.dart';
 import 'package:kitchen_counter/Utility/NavigationDrawer.dart';
 

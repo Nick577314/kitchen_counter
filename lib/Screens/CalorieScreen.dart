@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_counter/Utility/NavigationDrawer.dart';
-import 'package:kitchen_counter/Utility/pie_chart.dart';
 import 'package:kitchen_counter/Utility/dialog_box.dart';
 import 'package:kitchen_counter/data/food_data.dart';
 import 'package:kitchen_counter/api/food_api.dart';
-import 'package:kitchen_counter/home_page.dart';
+import 'package:kitchen_counter/Screens/HomeScreen.dart';
 
 class CalorieScreen extends StatelessWidget {
   final _controller1 = TextEditingController();
@@ -62,7 +61,7 @@ class CalorieScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         var foodName = _controller1.text;
-                        // print("i'm in caloriescreen for " + foodName);
+
                         List<Food> foodList = await searchFoodData(foodName);
 
                         foodListbox(context, foodList);
@@ -100,7 +99,7 @@ class CalorieScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => HomePage(
+                      builder: (context) => HomeScreen(
                             selectedFood: selectedFood,
                           )));
             }
