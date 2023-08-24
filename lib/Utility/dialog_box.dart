@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_counter/Utility/button.dart';
 import 'package:kitchen_counter/data/food_data.dart';
+import 'package:kitchen_counter/Utility/pie_chart.dart';
 
 class DialogBox extends StatelessWidget {
   final TextEditingController controller;
@@ -56,19 +57,21 @@ class DialogBox extends StatelessWidget {
 class DialogBox2 extends StatefulWidget {
   final TextEditingController controller;
   final List<Food> list;
+  final Function(Food?) onItemSelected;
 
   DialogBox2({
-    super.key,
+    Key? key,
     required this.list,
     required this.controller,
-  });
+    required this.onItemSelected,
+  }) : super(key: key);
+
   @override
   _DialogBox2State createState() => _DialogBox2State();
 }
 
 class _DialogBox2State extends State<DialogBox2> {
-  bool selected = false;
-  List<Food> selectedFoods = [];
+  Food? selectedFood;
 
   @override
   Widget build(BuildContext context) {
@@ -80,42 +83,50 @@ class _DialogBox2State extends State<DialogBox2> {
         textAlign: TextAlign.center,
       ),
       content: SizedBox(
-        height: 600,
+        height: 300,
         width: 400,
-        child: Container(
-          child: ListView.builder(
-            itemCount: widget.list.length,
-            itemBuilder: (context, index) {
-              var food = widget.list[index];
-              bool isSelected = selectedFoods.contains(food);
-              return Card(
-                color: isSelected ? Colors.tealAccent[100] : Colors.white,
-                elevation: 4,
-                child: ListTile(
-                  title: Text(
-                    food.foodname,
-                  ),
-                  textColor: Colors.black,
-                  selected: widget.list.contains(food),
-                  onTap: () {
-                    setState(() {
-                      if (selectedFoods.contains(food)) {
-                        selectedFoods.remove(food);
-                      } else {
-                        selectedFoods.add(food);
-                      }
-                    });
-                  },
+        child: Column(
+          children: [
+            Container(
+              height: 250, // Adjust the height as per your requirement
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.list.length,
+                itemBuilder: (context, index) {
+                  var food = widget.list[index];
+                  bool isSelected = food == selectedFood;
+
+                  return Card(
+                    color: isSelected ? Colors.tealAccent[100] : Colors.white,
+                    elevation: 4,
+                    child: ListTile(
+                      title: Text(widget.list[index].foodname),
+                      textColor: Colors.black,
+                      onTap: () {
+                        setState(() {
+                          selectedFood = widget.list[index];
+                        });
+                      },
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  widget.onItemSelected(selectedFood);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal[400],
                 ),
-              );
-            },
-          ),
+                child: Text("Selected"),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-}
-
-List<Food> sendData(List<Food> foodlist) {
-  return foodlist;
 }

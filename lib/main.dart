@@ -1,35 +1,23 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:kitchen_counter/Utility/Widget/NavigationDrawer.dart';
+import 'package:kitchen_counter/Screens/LoginScreen.dart';
+import 'package:toast/toast.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    title: "Kitchen Counter",
+    home: MyApp(),
+  ));
 }
-// always need this
 
 class MyApp extends StatelessWidget {
-  // and this
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'My App',
-      home: MyHomePage(),
+    ToastContext().init(context);
+    return MaterialApp(
+      title: "Login with signup",
+      home: LoginScreen(),
     );
   }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: const Text("HomePage"),
-          backgroundColor: Colors.teal[600],
-        ),
-        backgroundColor: Colors.teal[300],
-        drawer: const Navigation(),
-      );
 }

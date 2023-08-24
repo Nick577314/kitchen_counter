@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kitchen_counter/Utility/Widget/NavigationDrawer.dart';
-import 'package:kitchen_counter/Utility/Widget/pie_chart.dart';
+import 'package:kitchen_counter/Utility/NavigationDrawer.dart';
 import 'package:kitchen_counter/Utility/dialog_box.dart';
 import 'package:kitchen_counter/data/food_data.dart';
 import 'package:kitchen_counter/api/food_api.dart';
+import 'package:kitchen_counter/Screens/HomeScreen.dart';
 
 class CalorieScreen extends StatelessWidget {
   final _controller1 = TextEditingController();
+  final Function(Food)? onFoodItemSelected;
+
+  CalorieScreen({this.onFoodItemSelected});
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +23,6 @@ class CalorieScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            alignment: Alignment.topCenter,
-            width: 300,
-            height: 300,
-            child: Transform.scale(scale: 1.0, child: PieChartWidget()),
-          ),
           Container(
             padding: const EdgeInsets.all(8.0),
             child: Card(
@@ -64,7 +61,7 @@ class CalorieScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () async {
                         var foodName = _controller1.text;
-                        // print("i'm in caloriescreen for " + foodName);
+
                         List<Food> foodList = await searchFoodData(foodName);
 
                         foodListbox(context, foodList);
@@ -97,13 +94,16 @@ class CalorieScreen extends StatelessWidget {
         return DialogBox2(
           controller: _controller1,
           list: food,
-
-          // onCancel: () {},
-          // onSave: (p0) {},
-
-          // Close the dialog box
-
-          // onCancel: () => Navigator.of(context).pop(), // Close the dialog box
+          onItemSelected: (Food? selectedFood) {
+            if (selectedFood != null) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                            selectedFood: selectedFood,
+                          )));
+            }
+          },
         );
       },
     );
